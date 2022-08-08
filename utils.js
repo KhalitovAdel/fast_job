@@ -6,6 +6,7 @@ async function repeat(cb, maxAttempts = 10, delay = 30 * 1000) {
             return await cb();
         } catch (e) {
             if ((currentAttempt - 2) === maxAttempts) throw e;
+            await new Promise(res => setTimeout(res, delay));
         } finally {
             currentAttempt += 1;
         }
